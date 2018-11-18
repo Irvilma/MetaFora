@@ -15,6 +15,7 @@ The **MetaFora** (Metagenomics For All) pipeline analyzes metagenomic data based
 
 
 A schematic of the workflow: 
+
 ![](https://github.com/Irvilma/MetaFora/blob/master/Figures/workflow.png)
 
 ### Requirements
