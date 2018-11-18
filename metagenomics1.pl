@@ -22,7 +22,7 @@ my $Usage = "Usage: perl metagenomic1.pl -t <data type, PE = Paired-End or SE = 
 my ($file,$file1,$file2,$type,$qual,$trailing);
 my(@file1,@file2);
 
-my $path=$ENV{'PWD'}; #/home/ivilmac/meta/PE
+my $path=$ENV{'PWD'}; 
 # print "$path\n";
 
 GetOptions(
