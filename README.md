@@ -137,6 +137,7 @@ $ perl metafora2.pl -m <Filename of mapping file (without extension)> -db <datab
 ### Results
 
 Some examples of graphics generated using this pipeline:
+
 **Taxonomic profile**
 
 Taxonomy profile from analysis using SILVA database:
