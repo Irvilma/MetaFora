@@ -129,10 +129,23 @@ Before starting, you should check that your working directory includes:
 
 Run the pipeline in the terminal:
 
-$ perl metagenomic1.pl -t <data type, PE = Paired-End or SE = Single-End> 
+$ perl metafora1.pl -t <data type, PE = Paired-End or SE = Single-End> 
 -q <Trimmomatic AVGQUAL value> -tr <Trimmomatic TRAILING value>
 
-$ perl metagenomic2.pl -m <Filename of mapping file (without extension)> -db <database: gg, RDP or SILVA> -level <taxonomic level (L2, L3…L7)> -count <minimum number of count for retaining a OUT> -samples <minimum sample in which the OUT should be present>
+$ perl metafora2.pl -m <Filename of mapping file (without extension)> -db <database: gg, RDP or SILVA> -level <taxonomic level (L2, L3…L7)> -count <minimum number of count for retaining a OUT> -samples <minimum sample in which the OUT should be present>
+
+### Results
+
+Some examples of graphics generated using this pipeline:
+**Taxonomic profile**
+Taxonomy profile from analysis using SILVA database:
+
+![](https://github.com/Irvilma/MetaFora/blob/master/Figures/results-tax-silva.png)
+
+**Diversity profile**
+2D representation of PCoA results from the unweighted unifrac, weighted and Bray-Curtis index based on Greengenes database. The "Description" title is referred to samples:
+
+![](https://github.com/Irvilma/MetaFora/blob/master/Figures/figure7.png)
 
 
 [5]: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
