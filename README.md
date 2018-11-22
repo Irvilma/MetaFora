@@ -125,7 +125,7 @@ Before starting, you should check that your working directory includes:
 
 - Mapping file
 - “Reads” folder
-- Pipeline files: metagenomics1.pl, metagenomics2.pl and metagenomics_mod.pm
+- Pipeline files: metafora1.pl, metafora2.pl and metagenomics_mod.pm
 
 Run the pipeline in the terminal:
 
