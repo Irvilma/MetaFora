@@ -151,6 +151,7 @@ Taxonomy profile from analysis using SILVA database:
 ![](https://github.com/Irvilma/MetaFora/blob/master/Figures/figure7.png)
 
 
+
 [5]: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 [6]:https://www.java.com/en/
 [7]:http://www.usadellab.org/cms/?page=trimmomatic
