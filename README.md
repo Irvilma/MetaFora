@@ -132,7 +132,7 @@ Run the pipeline in the terminal:
 $ perl metafora1.pl -t <data type, PE = Paired-End or SE = Single-End> 
 -q <Trimmomatic AVGQUAL value> -tr <Trimmomatic TRAILING value>
 
-$ perl metafora2.pl -m <Filename of mapping file (without extension)> -db <database: gg, RDP or SILVA> -jobs <number of jobs for working in parallel> -level <taxonomic level (L2, L3…L7)> -count <minimum number of count for retaining a OUT> -samples <minimum sample in which the OUT should be present>
+$ perl metafora2.pl -db <database: gg, RDP or SILVA> -jobs <number of jobs for working in parallel> -m <Filename of mapping file (without extension)> -level <taxonomic level (L2, L3…L7)> -count <minimum number of count for retaining a OUT> -samples <minimum sample in which the OUT should be present>
 
 ### Results
 
