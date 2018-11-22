@@ -138,11 +138,13 @@ $ perl metafora2.pl -m <Filename of mapping file (without extension)> -db <datab
 
 Some examples of graphics generated using this pipeline:
 **Taxonomic profile**
+
 Taxonomy profile from analysis using SILVA database:
 
 ![](https://github.com/Irvilma/MetaFora/blob/master/Figures/results-tax-silva.png)
 
 **Diversity profile**
+
 2D representation of PCoA results from the unweighted unifrac, weighted and Bray-Curtis index based on Greengenes database. The "Description" title is referred to samples:
 
 ![](https://github.com/Irvilma/MetaFora/blob/master/Figures/figure7.png)
