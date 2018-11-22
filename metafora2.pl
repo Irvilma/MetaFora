@@ -21,22 +21,22 @@ BEGIN {
 		unless Statistics::R->VERSION >= 0.34;
 }
 
-my ($db,$pick,$level,$mapping,$n,$s);
+my ($db,$jobs,$level,$mapping,$n,$s);
 
-my $Usage = "Usage: perl metagenomic2.pl -m <Filename of mapping file> -db <database: gg, RDP or SILVA> -level <taxonomic level>\n"
+my $Usage = "Usage: perl metagenomic2.pl -m <Filename of mapping file> -db <database: gg, RDP or SILVA> -jobs <number of jobs for working in parallel> -level <taxonomic level>\n"
 ."-count <minimum number of count for retaining a OUT> -samples <minimum sample in which the OUT should be present>\n";
 
 GetOptions(
-	'db=s' => \$db,			 		 # string - "gg", "RDP", "SILVA"
-	'm=s' => \$mapping,       		 # string - "name of mapping file without extension"
-	'level=s' =>\$level,			 # numeric - from "L1" to "L7"
-	'count=s'=>\$n,						 # numeric - minimum number of count for retaining a OUT						
-	'samples=s'=>\$s, 						 # numeric - minimum sample in which the OUT should be present 
+	'db=s' => \$db,			 		# string - "gg", "RDP", "SILVA"
+	'jobs=s'=>\$jobs,				# numeric - number of jobs for workin in parallel
+	'm=s' => \$mapping,				# string - "name of mapping file without extension"
+	'level=s' =>\$level,			# numeric - from "L1" to "L7"
+	'count=s'=>\$n,					 # numeric - minimum number of count for retaining a OUT						
+	'samples=s'=>\$s,				# numeric - minimum sample in which the OUT should be present
 	) or die "$Usage\n";
 
 my $path=$ENV{'PWD'};
 
-print "Generating a single file\n";
 
 ## Validating mapping_file:
 $mapping = join ("", "$mapping",".txt");
@@ -46,6 +46,7 @@ print "Mapping file validated\n";
 my @reads = `find preprocessed_reads/`; 
 my $dir_reads = dirname(@reads);
 $s = spliting($dir_reads);
+print "Generating a single file\n";
 
 ## Downloading database and editing parameters file:
 if ($db eq "gg"){
@@ -57,8 +58,8 @@ if ($db eq "gg"){
 	
 	# Processing the data.
 	# Step 1. Picking open references OTUs:
-	$pick = "params.txt";
-	my $p = picking($pick)."\n";
+	# $pick = "params.txt";
+	my $p = picking($jobs)."\n";
 	print "Picking open-reference otu's completed\n"; 
 	# Step 2. Removing chimeras (usearch61):
 	my $chimeras = join ("","$db","_chimera_checking"); 
@@ -89,9 +90,8 @@ if ($db eq "RDP"){
 	
 	# Processing the data.
 	# Step 1. Picking open references OTUs:
-	my $pick = "params.txt";
 	my $REF = $RDP;
-	my $p = picking_ref($pick,$REF)."\n";
+	my $p = picking_ref($REF,$jobs)."\n";
 	print "Picking open-reference otu's completed\n";
 	
 	# Step 2. Removing chimeras (usearch61):
@@ -124,7 +124,7 @@ if ($db eq "SILVA"){
 	# Processing the data.
 	# Step 1. Picking open references OTUs:
 	my $REF = $SILVA;
-	my $pref = picking_ref($REF)."\n";
+	my $pref = picking_ref($REF,$jobs)."\n";
 	print "Picking open-reference otu's completed\n";
 	
 	# Step 2. Removing chimeras (usearch61):
@@ -168,7 +168,7 @@ print "Alpha diversity analysis calculated\n";
 ## Step6. Beta diversity analysis
 my $bc= join("", "bray_curtis_otu_table_","$db","_nochimera.txt");
 my $be = beta($otu_table,$mapping, $bc);
-print "Beta diversity analysis"
+print "Beta diversity analysis";
 
 ## Clustering samples from matrix distances.
 ## Calling R script
@@ -261,8 +261,7 @@ my $ob = observation($otu_table,$mapping_weig);
 ## declarar variable para la tabla de OTUS sin filtrar
 my $rawOTU= "4_pick_otus/otu_table_mc2_w_tax_no_pynast_failures.biom";
 ## declarar variable para la tabla de OTUs sin chimeras
-my $dir_otu_table = dirname($otu_table); #NO ESTA BIEN LA PATH!! (./)
-my $otu = "$dir_otu_table/$otu_table";
+my $otu = "4_pick_otus/$otu_table";
 ## declarar variable para la tabla OTUS filtrada por parametros
 my $filter_otu = "otu_table_no_singletons.biom";
 my $cv = convert ($rawOTU);
